@@ -4,7 +4,10 @@ from django.conf import settings
 import string
 random = SystemRandom()
 
-KEY_CHARACTERS = string.letters + string.digits
+try:
+    KEY_CHARACTERS = string.ascii_letters + string.digits
+except:
+    KEY_CHARACTERS = string.letters + string.digits
 
 def default_gen_secret_key(length=40):
     return ''.join([random.choice(KEY_CHARACTERS) for _ in range(length)])
